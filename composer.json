@@ -1,0 +1,20 @@
+{
+    "name": "davelwang/thinkphp5_uploader",
+    "description": "thinkphp",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "davel-wang",
+            "email": "davel28@qq.com"
+        }
+    ],
+    "require": {
+        "aliyuncs/oss-sdk-php": "^2.3",
+        "qiniu/php-sdk": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "davel\\thinkphp5\\": "src/"
+        }
+    }
+}
