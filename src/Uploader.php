@@ -16,7 +16,7 @@ class Uploader
             $config = config('davel.upload');
             if(!$config || empty($config['driver'])) $config =['driver'=>'File'];
 
-            $class = '\\davel\\driver\\'.$config['driver'];
+            $class = '\\davel\\thinkphp5\\driver\\'.$config['driver'];
             $this->handler = new $class;
             $this->handler->setOption($config[$config['driver']]);
         }
