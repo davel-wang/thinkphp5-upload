@@ -9,8 +9,8 @@ namespace davel\thinkphp5\driver;
  */
 class File extends Driver
 {
-    private function check($file,$type) {
-
+    protected function check($file,$type) {
+        return true;
     }
 
     public function upload($file,$dir,$type){
@@ -29,6 +29,6 @@ class File extends Driver
     }
 
     public function getSaveName() {
-        return request()->doamin().$this->saveName;
+        return request()->domain().$this->saveName;
     }
 }

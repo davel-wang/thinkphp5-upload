@@ -9,13 +9,14 @@ namespace davel\thinkphp5\driver;
  */
 class Aliyun extends Driver
 {
-    private function check($file,$type) {
+    protected function check($file,$type) {
         $validate = $this->getValidateByType($type);
-        $flag = $file->check($validate);        
-        if($info===false) {
+        $flag = $file->check($validate);
+        if($flag===false) {
             $this->error = $file->getError();
             return false;
         }
+        return true;
     }
 
     public function upload($file,$path,$type){
@@ -29,10 +30,7 @@ class Aliyun extends Driver
 
         $file_info = $file->getInfo();
         $filePath = $file_info['tmp_name'];
-
-        $path = rtrim($path, DS) . DS;
-        $saveName = $this->buildSaveName(true);
-        $object = $this->saveName = $path . $saveName;
+        $object = $this->saveName = $path .'/'. hash_file('sha1', $filePath).$file_info['name'];
 
         try{
             $ossClient = new \OSS\OssClient($accessKeyId, $accessKeySecret, $endpoint);

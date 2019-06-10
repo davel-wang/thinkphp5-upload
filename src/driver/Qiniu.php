@@ -9,13 +9,14 @@ namespace davel\thinkphp5\driver;
  */
 class Qiniu extends Driver
 {
-    private function check($file,$type) {
+    protected function check($file,$type) {
         $validate = $this->getValidateByType($type);
         $flag = $file->check($validate);        
-        if($info===false) {
+        if($flag===false) {
             $this->error = $file->getError();
             return false;
         }
+        return true;
     }
 
     public function upload($file,$path,$type){
@@ -31,9 +32,7 @@ class Qiniu extends Driver
         $file_info = $file->getInfo();
         $filePath = $file_info['tmp_name']; //上传的文件
 
-        $path = rtrim($path, DS) . DS;
-        $saveName = $this->buildSaveName(true);
-        $key = $this->saveName = $path . $saveName;
+        $key = $this->saveName = $path .'/'. hash_file('sha1', $filePath).$file_info['name'];
 
         $uploadMgr = new \Qiniu\Storage\UploadManager();
         list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);

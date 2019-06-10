@@ -14,16 +14,16 @@ class Uploader
     {
         if(is_null($this->handler)) {
             $config = config('davel.upload');
-            if(!$config || empty($config['driver'])) $config =['driver'=>'File'];
+            if(!$config || empty($config['driver'])) $config =['driver'=>'File','File'=>[],'validate'=>[]];
 
             $class = '\\davel\\thinkphp5\\driver\\'.$config['driver'];
             $this->handler = new $class;
-            $this->handler->setOption($config[$config['driver']]);
+            $this->handler->setOption(array_merge($config[$config['driver']],$config['validate']));
         }
     }
 
     public function upload($file,$dir,$type='image'){
-        $file->rule('sha1');
+        $file = $file->rule('sha1');
         return $this->handler->upload($file,$dir,$type);
     }
 
