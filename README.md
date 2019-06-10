@@ -34,13 +34,14 @@ return [
 ```
 
 $file = $this->request->file('file');
+if($file==null) return false;
 
 $uploader = new \davel\thinkphp5\Uploader();
-$savepath = $uploader->upload($file,'path','images');
+$savepath = $uploader->upload($file,'path','image');
 if($savepath==false) {
-    $error = $this->getError();
+    $error = $uploader->getError();
+    return false;
 }
-
-return $savepath;
+return true;
 
 ```
