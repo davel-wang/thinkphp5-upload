@@ -1,6 +1,6 @@
 {
     "name": "davelwang/thinkphp5_uploader",
-    "description": "thinkphp",
+    "description": "thinkphp5 upload",
     "license": "Apache-2.0",
     "authors": [
         {
@@ -8,6 +8,7 @@
             "email": "davel28@qq.com"
         }
     ],
+	"minimum-stability": "dev",
     "require": {
         "aliyuncs/oss-sdk-php": "^2.3",
         "qiniu/php-sdk": "^7.2"
